@@ -20,8 +20,8 @@ public class QNA {
 	private String username; // 작성자 이름
 	private String password; // 비밀번호
 	private Integer views; // 조회수
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private LocalDateTime createdAt; // 작성 일자
+	private LocalDateTime updatedAt; // 수정 일자
 	private Boolean secure; // 비밀글 여부 (bit 0, 1)
 	private Boolean deleted; // 논리 삭제 (bit 0, 1)
 }

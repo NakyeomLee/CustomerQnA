@@ -14,14 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import kr.co.greenart.web.customer.qna.QNA;
-import kr.co.greenart.web.customer.qna.QnA_Mapper;
+import kr.co.greenart.web.customer.qna.QNA_Mapper;
 
 @SpringBootTest // 스트링부트에서의 테스트
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // 메소드의 @Order의 순서를 따르겠다
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // 메소드에 지정한 @Order의 순서를 따르겠다
 class DemoApplicationTests {
-
+	
+	// 241023 수업
+	
 	@Autowired
-	private QnA_Mapper mapper;
+	private QNA_Mapper mapper;
 	
 	@Test
 	@Order(1) // 테스트 순서 정하기 (이 경우 첫번째, 원래는 알파벳 순이라서 만약 다른 메소드도 1로 작성하면 다시 알파벳 순서로 진행됨)

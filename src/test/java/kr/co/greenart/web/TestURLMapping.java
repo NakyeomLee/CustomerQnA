@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+// 241023 수업
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TestURLMapping {

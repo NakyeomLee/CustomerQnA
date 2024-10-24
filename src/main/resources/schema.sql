@@ -19,3 +19,7 @@ create table if not exists customerqna(
 	is_secure bit DEFAULT 0,
 	is_deleted bit DEFAULT 0	
 );
+
+insert into customerqna (title, content, username, password, is_secure) values ('질문1', '내용1', '작성자1', 'asd', 1);
+insert into customerqna (title, content, username, password, is_secure) values ('질문2', '내용2', '작성자2', 'qwe', 0);
+insert into customerqna (title, content, username, password, is_secure) values ('질문3', '내용3', '작성자3', 'zxc', 0);
