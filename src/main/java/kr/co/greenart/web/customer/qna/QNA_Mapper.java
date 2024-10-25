@@ -29,6 +29,7 @@ public interface QNA_Mapper {
 	// 게시글 목록 (글 번호 기준 내림차순(최신순)으로 정렬)
 	@Select({
 		"select article_id, title, content, username, views, comments, is_secure from customerqna"
+		, "where is_deleted = false"
 		, "order by article_id desc"
 		, "limit #{pageSize} offset #{offset}"
 	})
@@ -43,7 +44,14 @@ public interface QNA_Mapper {
 				, @Result(column = "is_secure", property = "secure")
 		}
 	)
+	// int pageSize(limit) : 몇 개의 데이터를 가지고 올 지
+	// int offset : 시작할 위치 설정 (0부터 시작)
+	// (이 경우 페이지당 5개 게시글 표시)
 	List<QNA> findAll(int pageSize, int offset);
+	
+	// 총 게시글 수
+	@Select("SELECT COUNT(*) FROM customerqna WHERE is_deleted = false")
+	int getTotalCount();
 	
 	// 게시글 목록 (작성일자 기준 내림차순 정렬)
 	@Select({
@@ -142,16 +150,17 @@ public interface QNA_Mapper {
 	int update(QNA qna);
 	
 	// 글 논리 삭제 (pk 및 password 일치) => is_deleted 수정
-	@Update("update customerqna set is_deleted = #{deleted} "
-			+ "where article_id = #{articleId} and password = #{password}")
+	@Update("update customerqna set is_deleted = true where article_id = #{articleId} and password = #{password}")
 	int updateDelete(QNA qna);
 	
+	// SQLProvider : MyBatis를 통해 동적으로 SQL 쿼리를 생성
+	// 정렬과 페이징 처리가 필요한 상황에 유용하게 쓰임
 	class SQLProvider {
 		public String selectOrderBy(MyOrder order) {
 			return new SQL()
 					.SELECT("columns")
 					.FROM("tablename")
-//					.ORDER_BY(order.get정렬방식())
+					.ORDER_BY(order.get정렬방식())
 					.LIMIT("리밋개수")
 					.OFFSET("오프셋")
 					.toString();

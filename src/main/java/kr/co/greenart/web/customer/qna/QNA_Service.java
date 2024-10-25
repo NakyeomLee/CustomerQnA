@@ -12,7 +12,9 @@ public interface QNA_Service {
 	int save(QNA qna);
 	
 	// 게시글 목록 조회
-	List<QNA> findAll();
+	List<QNA> findAll(int pageSize, int offset);
+	
+	int getTotalCount();
 	
 	// 게시글 수정
 	int update(QNA qna);

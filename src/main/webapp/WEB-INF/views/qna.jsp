@@ -9,8 +9,15 @@
 <title>고객 센터</title>
 </head>
 <body>
+	<!-- 삭제 성공 여부를 알림으로 나타냄 -->
+	<c:if test="${not empty message}">
+        <script>
+            alert("${message}");
+        </script>
+    </c:if>
+	
 	<header>
-		<h1>게시글 목록 구현</h1>
+		<h1>게시글 목록</h1>
 	</header>
 	<main>
 		<div class="panel">
@@ -67,6 +74,30 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			
+			<!-- 페이징 컨트롤 -->
+			<c:if test="${totalPages > 1}"> <!-- 페이지 수가 1보다 클 때만 표시 -->
+				<div class="pagination">
+					<c:if test="${currentPage > 0}">
+						<a href="/qna?page=${currentPage - 1}">이전</a>
+					</c:if>
+					
+					<c:forEach var="i" begin="0" end="${totalPages - 1}">
+						<c:choose>
+							<c:when test="${i == currentPage}">
+								<strong>${i + 1}</strong> <!-- 현재 페이지 강조 -->
+							</c:when>
+							<c:otherwise>
+								<a href="/qna?page=${i}">${i + 1}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					
+					<c:if test="${currentPage < totalPages - 1}">
+						<a href="/qna?page=${currentPage + 1}">다음</a>
+					</c:if>
+				</div>
+			</c:if>
 		</div>
 	</main>
 </body>
