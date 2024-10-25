@@ -10,6 +10,9 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.jdbc.SQL;
+
+import kr.co.greenart.web.util.MyOrder;
 
 // 241023 수업
 
@@ -23,9 +26,9 @@ public interface QNA_Mapper {
 	@Options(useGeneratedKeys = true, keyProperty = "articleId")
 	int save(QNA qna);
 	
-	// 게시글 목록 (글 번호 기준 내림차순으로 정렬)
+	// 게시글 목록 (글 번호 기준 내림차순(최신순)으로 정렬)
 	@Select({
-		"select article_id, title, content, username, views, is_secure from customerqna"
+		"select article_id, title, content, username, views, comments, is_secure from customerqna"
 		, "order by article_id desc"
 		, "limit #{pageSize} offset #{offset}"
 	})
@@ -36,6 +39,7 @@ public interface QNA_Mapper {
 				, @Result(column = "content", property = "content")
 				, @Result(column = "username", property = "username")
 				, @Result(column = "views", property = "views")
+				, @Result(column = "comments", property = "comments")
 				, @Result(column = "is_secure", property = "secure")
 		}
 	)
@@ -43,7 +47,7 @@ public interface QNA_Mapper {
 	
 	// 게시글 목록 (작성일자 기준 내림차순 정렬)
 	@Select({
-		"select article_id, title, content, username, views, is_secure from customerqna"
+		"select article_id, title, content, username, views, comments, is_secure from customerqna"
 		, "order by created_at desc"
 		, "limit #{pageSize} offset #{offset}"
 	})
@@ -54,14 +58,15 @@ public interface QNA_Mapper {
 				, @Result(column = "content", property = "content")
 				, @Result(column = "username", property = "username")
 				, @Result(column = "views", property = "views")
+				, @Result(column = "comments", property = "comments")
 				, @Result(column = "is_secure", property = "secure")
 		}
 	)
-	List<QNA> findAllOrderByCreatedAt(int pageSize, int offset);
+	List<QNA> sortByCreatedAt(int pageSize, int offset);
 	
 	// 게시글 목록 (조회수 기준 내림차순 정렬)
 	@Select({
-		"select article_id, title, content, username, views, is_secure from customerqna"
+		"select article_id, title, content, username, views, comments, is_secure from customerqna"
 		, "order by views desc"
 		, "limit #{pageSize} offset #{offset}"
 	})
@@ -72,12 +77,30 @@ public interface QNA_Mapper {
 				, @Result(column = "content", property = "content")
 				, @Result(column = "username", property = "username")
 				, @Result(column = "views", property = "views")
+				, @Result(column = "comments", property = "comments")
 				, @Result(column = "is_secure", property = "secure")
 		}
 	)
-	List<QNA> findAllOrderByViews(int pageSize, int offset);
+	List<QNA> sortByViews(int pageSize, int offset);
 	
 	// 게시글 목록 (댓글수 순)
+	@Select({
+		"select article_id, title, content, username, views, comments, is_secure from customerqna"
+		, "order by views desc"
+		, "limit #{pageSize} offset #{offset}"
+	})
+	@Results(id = "qnaByCommentsList"
+		, value = {
+				@Result(column = "article_id", property = "articleId")
+				, @Result(column = "title", property = "title")
+				, @Result(column = "content", property = "content")
+				, @Result(column = "username", property = "username")
+				, @Result(column = "views", property = "views")
+				, @Result(column = "comments", property = "comments")
+				, @Result(column = "is_secure", property = "secure")
+		}
+	)
+	List<QNA> sortByComments(int pageSize, int offset);
 	
 	// 게시글 조회 시, is_secure 값이 false(bit값의 0)인 행만 조회
 	@Select({
@@ -100,6 +123,7 @@ public interface QNA_Mapper {
 					, @Result(column = "username", property = "username")
 					, @Result(column = "password", property = "password")
 					, @Result(column = "views", property = "views")
+					, @Result(column = "comments", property = "comments")
 					, @Result(column = "created_at", property = "createdAt")
 					, @Result(column = "updated_at", property = "updatedAt")
 					, @Result(column = "is_secure", property = "secure")
@@ -112,9 +136,25 @@ public interface QNA_Mapper {
 	@Update("UPDATE customerqna SET views = views + 1 WHERE article_id = #{articleId}")
 	int updateCount(Integer articleId);
 	
+	// 게시글 수정
+	@Update("update customerqna set title = #{title}, username = #{username}, content = #{content}"
+			+ "where article_id = #{articleId} and password = #{password}")
+	int update(QNA qna);
+	
 	// 글 논리 삭제 (pk 및 password 일치) => is_deleted 수정
 	@Update("update customerqna set is_deleted = #{deleted} "
 			+ "where article_id = #{articleId} and password = #{password}")
-//	int updateIsDeleted(int is_deleted, int article_id, String password);
-	void updateDelete();
+	int updateDelete(QNA qna);
+	
+	class SQLProvider {
+		public String selectOrderBy(MyOrder order) {
+			return new SQL()
+					.SELECT("columns")
+					.FROM("tablename")
+//					.ORDER_BY(order.get정렬방식())
+					.LIMIT("리밋개수")
+					.OFFSET("오프셋")
+					.toString();
+		}
+	}
 }

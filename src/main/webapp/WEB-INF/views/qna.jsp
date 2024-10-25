@@ -45,6 +45,7 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>조회수</th>
+						<th>댓글수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -58,9 +59,10 @@
 					<c:forEach var="qna" items="${qnaList}">
 						<tr>
 							<td>${qna.articleId}</td>
-							<td>${qna.title}</td>
+							<td><a href="/qna/${qna.articleId}">${qna.title}</a></td>
 							<td>${qna.username}</td>
 							<td>${qna.views}</td>
+							<td>${qna.comments}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

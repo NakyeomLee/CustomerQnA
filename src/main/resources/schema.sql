@@ -14,12 +14,13 @@ create table if not exists customerqna(
 	username VARCHAR(20) NOT NULL,
 	password VARCHAR(64) NOT NULL,
 	views INT DEFAULT 0,
+	comments INT DEFAULT 0,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	is_secure bit DEFAULT 0,
 	is_deleted bit DEFAULT 0	
 );
 
-insert into customerqna (title, content, username, password, is_secure) values ('질문1', '내용1', '작성자1', 'asd', 1);
-insert into customerqna (title, content, username, password, is_secure) values ('질문2', '내용2', '작성자2', 'qwe', 0);
-insert into customerqna (title, content, username, password, is_secure) values ('질문3', '내용3', '작성자3', 'zxc', 0);
+insert into customerqna (title, content, username, password, is_secure) values ('질문1', '내용1', '작성자1', '123', 1);
+insert into customerqna (title, content, username, password, is_secure) values ('질문2', '내용2', '작성자2', '234', 0);
+insert into customerqna (title, content, username, password, is_secure) values ('질문3', '내용3', '작성자3', '345', 0);

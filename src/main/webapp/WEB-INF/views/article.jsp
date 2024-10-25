@@ -16,7 +16,12 @@
 		<p>내용</p>
 		<p>${ qna.content }</p>
 		<footer>
-			<p>작성일 : ${ qna.createdAt }</p>
+			<p>작성일 : ${ qna.createdAt }</p><br>
+			<a href="/qnaModify/${ qna.articleId }">수정하기</a>
+			 <form action="/qna/delete/${qna.articleId}" method="POST" onsubmit="return confirm('이 게시글을 정말 삭제하시겠습니까?');">
+        		<input type="submit" value="삭제하기">
+    		 </form>
+			<a href="/qna">게시글 목록으로 돌아가기</a>
 		</footer>
 	</article>
 </body>

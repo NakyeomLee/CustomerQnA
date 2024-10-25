@@ -14,6 +14,11 @@ public interface QNA_Service {
 	// 게시글 목록 조회
 	List<QNA> findAll();
 	
+	// 게시글 수정
+	int update(QNA qna);
+	
+	// 게시글 논리 삭제
+	int makeDelete(QNA qna);	
 /*
 1. 게시글 작성
 
@@ -24,7 +29,7 @@ public interface QNA_Service {
 
 모든 사용자가 게시글 열람 가능 (비밀글은 비밀번호 일치시)
 - [V] 조회수 자동 증가
-최신순/조회수순/댓글수순 정렬 가능
+최신순/조회수순 정렬 가능
 페이지당 20개 게시글 표시
 
 3. 게시글 수정/삭제

@@ -14,6 +14,8 @@ public class QNA_ServiceImpl implements QNA_Service {
 	@Autowired
 	private QNA_Mapper mapper;
 	
+
+	
 	@Override
 	@Transactional
 	public QNA findById(Integer articleId) {
@@ -47,5 +49,17 @@ public class QNA_ServiceImpl implements QNA_Service {
 		
 		
 		return mapper.findAll(20, 0);
+	}
+
+	@Override
+	public int update(QNA qna) {
+		
+		return mapper.update(qna);
+	}
+
+	@Override
+	public int makeDelete(QNA qna) {
+		
+		return mapper.updateDelete(qna);
 	}
 }
