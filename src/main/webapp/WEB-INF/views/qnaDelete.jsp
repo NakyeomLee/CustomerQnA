@@ -8,11 +8,15 @@
 </head>
 <body>
 	<h3>게시글 삭제를 위해 비밀번호를 입력하세요.</h3>
+	
+	<!-- 비밀번호 입력 폼 -->
 	<form action="/qnaDelete/${article_id}" method="POST">
 		<label for="password">비밀번호: </label>
 		<input type="password" id="password" name="password" required>
 		<input type="submit" value="삭제하기">
 	</form>
+	
+	<!-- 게시글 상세 페이지로 이동 -->
 	<a href="/qna/${article_id}">게시글로 돌아가기</a>
 </body>
 </html>

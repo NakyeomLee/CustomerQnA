@@ -24,7 +24,7 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// 반복문 활용해서 QNA 데이터 저장 (이 경우 5번 저장)
-		for (int i = 1; i < 6; i++) {
+		for (int i = 1; i < 200; i++) {
 			// QNA 객체를 빌더 패턴으로 생성
 			mapper.save(QNA.builder().title("제목" + i).content("내용" + i).username("작성자" + i)
 					.password("password" + i).build());

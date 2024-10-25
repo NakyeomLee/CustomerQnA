@@ -113,7 +113,7 @@ public interface QNA_Mapper {
 	// 게시글 조회 시, is_secure 값이 false(bit값의 0)인 행만 조회
 	@Select({
 		"select article_id, title, content, username, views, is_secure from customerqna"
-		, "where is_secure = 0"
+		, "where is_secure = false"
 		, "order by article_id desc"
 		, "limit #{pageSize} offset #{offset}"
 	})

@@ -23,12 +23,15 @@
 		<div class="panel">
 			<div class="searchPanel">
 				<div>
+					<!-- 글쓰기 페이지로 이동 -->
 					<a href="/qnaWrite">글쓰기</a>
 				</div>
+				<!-- 기준별 검색 폼 -->
 				<form id="searchForm" method="GET" action="/searchQna">
 					<table>
 						<tr>
 							<td>
+								<!-- 드롭박스 이용해서 검색 기준 보여줌 -->
 								<select id="searchField" class="searchOption"
 										name="searchField">
 									<option value="title">제목</option>
@@ -37,15 +40,18 @@
 								</select>
 							</td>
 							<td>
+								<!-- 검색어 입력칸 -->
 								<input type="text" id="searchText" class="searchOption"
 									placeholder="검색어 입력" name="searchText">
 							</td>
+							<!-- 제출 버튼(검색 버튼) -->
 							<td><input type="submit" value="검색"></td>
 						</tr>
 					</table>
 				</form>
 			</div>
-			<table>
+			<table> <!-- 게시글 목록 나타낼 표 -->
+				<!-- 표 헤더 -->
 				<thead>
 					<tr>
 						<th>no</th>
@@ -55,9 +61,10 @@
 						<th>댓글수</th>
 					</tr>
 				</thead>
+				<!-- 표 바디 -->
 				<tbody>
+					<!-- 게시물 목록이 비어있을 경우 -->
 					<c:if test="${empty qnaList}">
-						<!-- 게시물 목록이 비어있을 경우 -->
 						<tr>
 							<td colspan="5">게시글이 없습니다.</td>
 						</tr>
@@ -81,8 +88,21 @@
 					<c:if test="${currentPage > 0}">
 						<a href="/qna?page=${currentPage - 1}">이전</a>
 					</c:if>
+
+					<!-- 페이지 블록 크기 설정 -->
+					<c:set var="pageBlockSize" value="10" />
+
+					<!-- 시작 페이지와 끝 페이지 계산 -->
+					<c:set var="startBlock" value="${(currentPage / pageBlockSize)}" />
+					<c:set var="startPage" value="${startBlock * pageBlockSize}" />
+					<c:set var="endPage" value="${startPage + pageBlockSize - 1}" />
 					
-					<c:forEach var="i" begin="0" end="${totalPages - 1}">
+					<c:if test="${endPage >= totalPages}">
+						<c:set var="endPage" value="${totalPages - 1}" />
+					</c:if>
+
+					<!-- 페이지 번호 출력 -->
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
 						<c:choose>
 							<c:when test="${i == currentPage}">
 								<strong>${i + 1}</strong> <!-- 현재 페이지 강조 -->
@@ -92,7 +112,7 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					
+
 					<c:if test="${currentPage < totalPages - 1}">
 						<a href="/qna?page=${currentPage + 1}">다음</a>
 					</c:if>

@@ -11,9 +11,10 @@ import kr.co.greenart.web.util.QNA_NotFoundException;
 
 @Service
 public class QNA_ServiceImpl implements QNA_Service {
-	@Autowired
+	@Autowired // QNA_Mapper bean 주입
 	private QNA_Mapper mapper;
 	
+	// article_id에 해당하는 게시글 조회
 	// @Transactional : 해당 메소드가 트랜잭션 안에서 실행되고, 
 	// 예외 발생하면 자동 롤백, 예외 발생하지않으면 커밋됨
 	// 데이터베이스 상태를 변경하는 메서드들에 필요(새 글 작성, 수정, 삭제 등등)
@@ -38,6 +39,7 @@ public class QNA_ServiceImpl implements QNA_Service {
 		 return qna;
 	}
 
+	// 게시글 작성
 	@Override
 	@Transactional
 	public int save(QNA qna) {
@@ -46,6 +48,7 @@ public class QNA_ServiceImpl implements QNA_Service {
 		return rows;
 	}
 
+	// 게시글 목록 조회
 	@Override
 	public List<QNA> findAll(int pageSize, int offset) {
 		
@@ -55,11 +58,13 @@ public class QNA_ServiceImpl implements QNA_Service {
 		return mapper.findAll(pageSize, offset);
 	}
 	
+	// 게시글 전체 수 조회
 	@Override
 	public int getTotalCount() {
 	    return mapper.getTotalCount();
 	}
 
+	// 게시글 수정
 	@Override
 	@Transactional
 	public int update(QNA qna) {
@@ -67,6 +72,7 @@ public class QNA_ServiceImpl implements QNA_Service {
 		return mapper.update(qna);
 	}
 
+	// 게시글 삭제
 	@Override
 	@Transactional
 	public int makeDelete(QNA qna) {
