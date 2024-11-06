@@ -55,7 +55,14 @@ public class QNA_ServiceImpl implements QNA_Service {
 		// int limit : 몇 개의 데이터를 가지고 올 지
 		// int offset : 시작할 위치 설정 (0부터 시작)
 		// (이 경우 페이지당 5개 게시글 표시)
-		return mapper.findAll(pageSize, offset);
+		List<QNA> qnaList = mapper.findAll(pageSize, offset);
+		
+		// 포맷 설정
+        for (QNA qna : qnaList) {
+            qna.formatDateTime(qna.getCreatedAt(), qna.getUpdatedAt());
+        }
+		
+		return qnaList;
 	}
 	
 	// 게시글 전체 수 조회

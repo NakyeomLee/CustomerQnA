@@ -19,6 +19,7 @@ import kr.co.greenart.web.util.MyOrder;
 @Mapper
 public interface QNA_Mapper {
 	// 글 작성
+	// @Options 는 h2db의 last_insert_id
 	@Insert({
 		"insert into customerqna (title, content, username, password)"
 		, "values (#{title}, #{content}, #{username}, #{password})"
@@ -28,21 +29,22 @@ public interface QNA_Mapper {
 	
 	// 게시글 목록 (글 번호 기준 내림차순(최신순)으로 정렬)
 	@Select({
-		"select article_id, title, content, username, views, comments, is_secure from customerqna"
-		, "where is_deleted = false"
-		, "order by article_id desc"
-		, "limit #{pageSize} offset #{offset}"
-	})
-	@Results(id = "qnaList"
-		, value = {
-				@Result(column = "article_id", property = "articleId")
-				, @Result(column = "title", property = "title")
-				, @Result(column = "content", property = "content")
-				, @Result(column = "username", property = "username")
-				, @Result(column = "views", property = "views")
-				, @Result(column = "comments", property = "comments")
-				, @Result(column = "is_secure", property = "secure")
-		}
+        "select article_id, title, content, username, views, comments, is_secure, created_at from customerqna",
+        "where is_deleted = false",
+        "order by article_id desc",
+        "limit #{pageSize} offset #{offset}"
+    })
+	@Results(id = "qnaList",
+	    value = {
+	        @Result(column = "article_id", property = "articleId"),
+	        @Result(column = "title", property = "title"),
+	        @Result(column = "content", property = "content"),
+	        @Result(column = "username", property = "username"),
+	        @Result(column = "views", property = "views"),
+	        @Result(column = "comments", property = "comments"),
+	        @Result(column = "is_secure", property = "secure"),
+	        @Result(column = "created_at", property = "createdAt")
+	    }
 	)
 	// int pageSize(limit) : 몇 개의 데이터를 가지고 올 지
 	// int offset : 시작할 위치 설정 (0부터 시작)
@@ -90,25 +92,6 @@ public interface QNA_Mapper {
 		}
 	)
 	List<QNA> sortByViews(int pageSize, int offset);
-	
-	// 게시글 목록 (댓글수 순)
-	@Select({
-		"select article_id, title, content, username, views, comments, is_secure from customerqna"
-		, "order by views desc"
-		, "limit #{pageSize} offset #{offset}"
-	})
-	@Results(id = "qnaByCommentsList"
-		, value = {
-				@Result(column = "article_id", property = "articleId")
-				, @Result(column = "title", property = "title")
-				, @Result(column = "content", property = "content")
-				, @Result(column = "username", property = "username")
-				, @Result(column = "views", property = "views")
-				, @Result(column = "comments", property = "comments")
-				, @Result(column = "is_secure", property = "secure")
-		}
-	)
-	List<QNA> sortByComments(int pageSize, int offset);
 	
 	// 게시글 조회 시, is_secure 값이 false(bit값의 0)인 행만 조회
 	@Select({

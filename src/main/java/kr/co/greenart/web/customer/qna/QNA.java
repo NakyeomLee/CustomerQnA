@@ -1,6 +1,7 @@
 package kr.co.greenart.web.customer.qna;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,4 +26,20 @@ public class QNA {
 	private LocalDateTime updatedAt; // 수정 일자
 	private Boolean secure; // 비밀글 여부 (bit 0, 1)
 	private Boolean deleted; // 논리 삭제 (bit 0, 1)
+	
+	private String formatCreatedAt; // 포맷(형태) 변경한 작성 일자
+	private String formatUpdatedAt; // 포맷(형태) 변경한 수정 일자
+	
+	// LocalDateTime 포맷 변경 메소드
+	public void formatDateTime(LocalDateTime createdAt, LocalDateTime updatedAt) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		
+		if (createdAt != null) {
+			formatCreatedAt = createdAt.format(formatter);
+		}
+		
+		if (updatedAt != null) {
+			formatUpdatedAt = updatedAt.format(formatter);
+		}
+	}
 }

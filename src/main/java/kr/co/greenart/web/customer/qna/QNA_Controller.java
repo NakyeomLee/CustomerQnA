@@ -32,7 +32,7 @@ public class QNA_Controller {
 
 	@GetMapping("/qna")
 	// @PageableDefault(size = 10) => pageable의 기본값을 10으로 설정
-	public String qna(@PageableDefault(size = 5) Pageable pageable, Model model) {
+	public String qna(@PageableDefault(size = 10) Pageable pageable, Model model) {
 		int pageSize = pageable.getPageSize();
 		int pageNumber = pageable.getPageNumber();
 		int offset = (int) pageable.getOffset();
@@ -69,9 +69,22 @@ public class QNA_Controller {
 	}
 
 	@PostMapping("/qnaWrite")
-	public String writeQna(QNA qna) {
+	public String writeQna(QNA qna, RedirectAttributes redirectAttributes) {
+		// 필수 입력 검증
+		if (qna.getTitle() == null || qna.getTitle().isEmpty() || 
+			qna.getUsername() == null || qna.getUsername().isEmpty() ||
+			qna.getContent() == null || qna.getContent().isEmpty() ||
+			qna.getPassword() == null || qna.getPassword().isEmpty()) {
+			
+			// 오류 메세지 리다이렉트로 전달
+			redirectAttributes.addFlashAttribute("errorMessage", "모든 칸의 내용을 입력해주세요.");
+			return "redirect:/qnaWrite"; // 작성 페이지로 리다이렉트
+		}
+		
+		// 게시글 등록(저장)
 		service.save(qna);
 
+		// 게시글 등록 후 게시글 목록으로 리다이렉트
 		return "redirect:/qna";
 	}
 
@@ -129,5 +142,4 @@ public class QNA_Controller {
 		redirectAttributes.addFlashAttribute("message", "게시글이 삭제되었습니다.");
 		return "redirect:/qna"; // 삭제 후 게시글 목록으로 리다이렉트
 	}
-
 }
