@@ -54,7 +54,7 @@
   <img src="https://github.com/user-attachments/assets/02da5986-4695-490f-acac-9a27e39437c4" width="600">
 </div>
 
-<br>
+<br><br>
 
 2. 게시글 삭제
 
@@ -74,12 +74,19 @@
 
 <br>
 
+<p align="center">[작성 전]</p>
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/dca9d40b-52d8-404a-9422-34dca1e7cf07" width="500">
-  <img src="https://github.com/user-attachments/assets/e18fd275-7647-48ee-84f8-98d61d51f57e" width="500">
+  <img src="https://github.com/user-attachments/assets/dca9d40b-52d8-404a-9422-34dca1e7cf07" width="600">
 </div>
 
 <br>
+
+<p align="center">[작성 후]</p>
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/e18fd275-7647-48ee-84f8-98d61d51f57e" width="600">
+</div>
+
+<br><br>
 
 - 게시글 상세 확인
 
