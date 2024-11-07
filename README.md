@@ -1,155 +1,172 @@
-<img src="https://github.com/SYacuCLoud/Readme-Template/assets/4344575/1eb2b764-a426-4792-a08c-9589fc58e9a7" width="400">
-<img src="https://github.com/SYacuCLoud/Readme-Template/assets/4344575/09eff249-5268-4599-bf5c-0db5f9df2f06" width="400">
 <h1 align="center">
-  README.md 간단한 예제 템플릿입니다
+  익명 게시판 (Spring Boot 프로젝트)
 </h1>
-<p align="center">간단한 소개글을 적어주세요</p>
-<p align="center">직접 마크업(HTML 사용가능), 마크다운을 작성하거나</p>
-<p align="center">(1. Github 활용 2. VS Code와 preview 확장 활용)</p>
-<br>
-<p align="center">또는 생성기를 활용한 방법도 있답니다 =>
-  <a href="https://github.com/kefranabg/readme-md-generator">생성기로 이동 (npm 필요)</a>
+<p align="center">익명으로 글을 작성할 수 있는 간단한 게시판</p>
+<p align="center">
+  원하는 아이디 혹은 닉네임과 비밀번호를 적고 게시글을 작성할 수 있으며<br>
+  그때 설정된 비밀번호를 해당 게시글의 수정 및 삭제에 활용
 </p>
-<br>
-<p align="center">다음은 컨텐츠 예시입니다. 너무 많은 내용은 읽기 어렵습니다. 필요한 부분만을 사용하세요.</p>
 
 ---
-## 기능 설명
-[서버 타임 컨트롤러 설명](/src/main/java/kr/co/greenart/web/util/README.md)
-[링크 텍스트 스프링 부트 어노테이션 설명](https://github.com/NakyeomLee/customerpna/tree/master/src/main/java/kr/co/greenart/web)
 
-<p align="center">
-  <h2>Built With</h2>
-  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
-  <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">
-  <img src="https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white">
-  
-  <p>위와 같은 배지로 표현할 수도 있어요. 아래 링크로 스태틱 배지를 활용해보세요</p>
-</p>
-<a href="https://flat.badgen.net">
-  <img src="https://flat.badgen.net/badge/%EB%A7%81%ED%81%AC/%EC%9D%B4%EB%8F%99/">
-</a>
-<a href="https://shields.io/badges/static-badge">
-  <img alt="Static Badge" src="https://img.shields.io/badge/%EB%A7%81%ED%81%AC-%EC%9D%B4%EB%8F%99-red">
-</a>
+## key Features
 
-[![링크 - 클릭](https://img.shields.io/badge/링크-클릭-2ea44f)](https://michaelcurrin.github.io/badge-generator/#/generic)
-[![링크](https://img.shields.io/badge/%EB%A7%81%ED%81%AC-%ED%81%B4%EB%A6%AD-green?style=flat)](https://badgesgenerator.com/)
+<br>
 
-## Contents
+- 게시글 번호, 제목, 작성자, 조회수, 작성일자 등 게시물 정보를 한 눈에 알 수 있도록 구성
 
-<p align="center">hash fragment를 활용한 이동 링크 예시</p>
-<p align="center">
-  <a href="#key-features">Key Features</a> |
-  <a href="#how-to-use--development-setup">How To Use</a> |
-  <a href="#authors">Authors</a>
-</p>
+<br>
 
-## What is?
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/e21876c6-fc55-42c4-a9bd-b4a659bc664a" width="800">
+</div>
 
--   프로젝트 탄생배경, 목적, 역사 등을 서술합니다.
+<br>
 
-## Key Features
+- 특정 게시글을 간편하게 찾을 수 있도록 검색 기능 구현
 
-- 핵심 기능 서술하기 위해 텍스트, 하이퍼링크와 스크린샷, 도표 등을 첨부해주세요.
+<br>
 
-> [!TIP]
-> 헤딩, 단락, 링크 및 도표, 목록, 인용 코드, 체크박스 작성법 등을 알아보세요
-> 
-> [Markdown 기분 문법 알아보기](https://www.markdownguide.org/basic-syntax/)
->
-> [Markdown Github 확장 문법 알아보기](https://docs.github.com/ko/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/b3fafb59-118d-4170-9e6d-fe1c15740471" width="800">
+  <img src="https://github.com/user-attachments/assets/1d8a83e3-f06b-4edb-a5ed-344dfb177b98" width="800">
+</div>
 
-> 도표 생성 문법이 어렵다면 생성기를 활용하세요 => [MD Table Generator](https://www.tablesgenerator.com/markdown_tables)
+<br>
 
-## How To Use / Development setup
+- 게시글 수정 및 삭제할 때는 해당 게시글을 작성할 때 설정한 비밀번호를 입력해서 일치하면 가능하도록 함
 
-* 사용 환경과 사용법 설명
-* 또는 개발을 위한 개발환경 구축 설명하기
+<br>
 
-> To clone and run this application,
-> you'll need [Git](https://git-scm.com)
-> and [download Maven](https://maven.apache.org/download.cgi)
-> Maven is a Java tool, so you must have Java installed in order to proceed. Set the JAVA_HOME environment variable pointing to your JDK installation or have the java executable on your PATH.
->
-> From your command line:
+1. 게시글 수정
 
-```bash
-# Clone this repository
-$ git clone https://github.com/username/app-repository
+<p align="center">[수정 전]</p>
 
-# Go into the repository
-$ cd app-repository
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/3fd98157-d096-4024-bfe9-3057d674c073" width="600">
+</div>
 
-# Install dependencies
-$ maven package
+<br>
 
-# Run the app
-$ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
-```
+<p align="center">[정보를 수정하고 해당 게시글의 비밀번호 입력]</p>
 
-> **Note** > [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) or use OpenJDK.
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/02da5986-4695-490f-acac-9a27e39437c4" width="600">
+</div>
 
-## Repository Structure
+<br>
 
-```sh
-└──Project
-    ├─README.md
-    ├─.gitignore
-    ├─src
-    │  ├─main
-    │  │  ├─java
-    │  │  │  ├─...
-    │  │  │  └─packages
-    │  │  ├─resource
-    │  │  └─webapp
-    │  │      ├─META-INF
-    │  │      ├─static
-    │  │      └─WEB-INF
-    │  │          ├─lib
-    │  │          └─views
-    │  └─test
-    │      └─java
-    └─pom.xml
-```
+2. 게시글 삭제
 
-- 위와 같은 폴더 구조 텍스트는 => [폴더 트리 구조 생성 사이트](https://ascii-tree-generator.com/) 를 활용하거나
-- 또는 윈도우 환경에서는 _`cmd /c tree`_ 명령어를 해당 폴더에서 실행해보세요
+<p align="center">[삭제할 게시글의 비밀번호 입력]</p>
 
-## Download
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/0a147780-7379-4933-a214-9f7d144b56ad" width="600">
+</div>
 
-* 릴리즈 링크 있으면 첨부 가능
-* [download]() the latest installable version of for Windows, macOS and Linux.
+<br>
 
-## ToDo
+## other components
 
--   로드맵 서술. 체크 박스 등 활용
+<br>
 
-*   [x] Add Changelog
-*   [x] Add back to top links
-*   [ ] Multi-language Support
-    -   [ ] English
+- 게시글 작성
 
-## FAQ
+<br>
 
-<details>
-  <summary>자주 묻는 질문?</summary>
-  <dl>
-  <dt>질문 1</dt>
-  <dd>답변 1</dd>
-  </dl>
-</details>
-    
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/dca9d40b-52d8-404a-9422-34dca1e7cf07" width="500">
+  <img src="https://github.com/user-attachments/assets/e18fd275-7647-48ee-84f8-98d61d51f57e" width="500">
+</div>
+
+<br>
+
+- 게시글 상세 확인
+
+<br>
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/83d7193c-8539-4309-b170-cabd8274d7d0" width="900">
+</div>
+
+<br>
+
+<h2>Built With</h2>
+<br>
+
+<div>
+  <img src="https://github.com/user-attachments/assets/9e352e71-414a-4e36-a9ee-2d92e06b6678">
+  <img src="https://github.com/user-attachments/assets/ef0fb4e9-083c-4b86-b97a-4b4f8c872fbe">
+  <img src="https://github.com/user-attachments/assets/7b274529-cdea-4ee4-a4a8-fa9de36cb063">
+  <img src="https://github.com/user-attachments/assets/aba6313f-bf26-46fb-825b-9f3acf68433d">
+  <img src="https://github.com/user-attachments/assets/b1f01c91-93d4-4807-bfa5-7033932116f4">
+  <img src="https://github.com/user-attachments/assets/be3cd3ae-a049-41a5-96ab-49054c38c8f5"> 
+  <img src="https://github.com/user-attachments/assets/0ef37a0d-1dbf-4ffc-b24b-33213554fcf6">  
+  <img src="https://github.com/user-attachments/assets/5bfbbf40-ef9b-4f6d-a429-f46e19d8065a">  
+</div>
+<br>
+
+## Development setup
+
+<br>
+
+- 테이블 논리 구성, 작업 프로젝트 생성, 공유 repository 생성
+- H2DB 라이브러리 추가 및 활용(pom.xml파일과 properties 파일 수정,sql 파일을 프로젝트에 추가)
+ 1. 테이블 정의 : 기본키(Pk), 외래키(Fk), 널 허용 여부(Null/Not Null), 자동 증가(Auto Increment)설정을 포함한 테이블 정의
+ 2. 테이블 생성 : customerqna 테이블 생성하고 테스트 용 데이터를 추가
+ 3. Test Mapper를 작성한 뒤 h2-console실시간 입출력 테스트
+
+<br>
+
+<p align="center">[sql파일의 작성 내용 중 일부]</p>
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/52b38f6e-7d02-41bb-bd9f-80b373b183ac" width="600">
+</div>
+
+<br>
+
+## 테이블 구성
+
+<br>
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/547c4eeb-a388-4a7c-8b2e-3a4bf7293272" width="400">
+</div>
+
+<br>
+
+## work process
+
+<br>
+
+- 익명 게시판을 기획하고, 사용자 요구 사항을 분석하여 기능을 정의
+- 테스트 과정을 간편화 하기 위해 H2DB를 사용하여 데이터를 저장하고, 서버 시작 시 필요한 테이블들을 자동으로 생성하도록 <br>
+  초기화 스크립트를 작성
+- 기본적인 게시글 작성 기능을 구현한 후, 비밀번호를 통한 수정 및 삭제 기능을 추가
+
+<br>
+
+---
+
+<br>
+
+## 자주 묻는 질문
+
+<h3>H2DB를 사용한 이유?</h3>
+
+- 실제 제작하는 프로그램이나 web 사이트의 경우 일반적인 데이터베이스를 사용하는 것이 맞습니다.<br>
+
+  하지만 해당 게시판은 실제 배포를 위함이 아닌, 개인적인 역량을 강화하는 목적으로 만들었기 때문에 <br>
+  기존의 Web 프로젝트에서 사용한 MySQL대신 테스트가 간편한 H2DB를 사용하게 되었습니다.<br>
+
+  (H2DB는 테스트를 진행한 뒤, 서버를 재시작했을 때 sql파일에 작성된 내용을 제외한 나머지 데이터들은 <br>
+  초기화되기 때문에 빠른 테스트를 진행할 수 있습니다.) <br>
+
+<br>
+
+---
+
 ## Authors
 
-* GitHub [@깃허브 프로필 페이지](https://github.com/SYacuCLoud) | Twitter [@SNS 등](https://twitter.com/)
-
-> 다음과 같은 profile을 사용하고자 한다면 아래 링크들을 활용해보세요
->
-> [GitHub stats](https://github.com/anuraghazra/github-readme-stats)
->
-> [Profile generator](https://gprm.itsvg.in/)
-
-[![GitHub stats](https://github-readme-stats.vercel.app/api?username=SYacuCLoud)](https://github.com/SYacuCLoud)
-
-
+* GitHub  [@이나겸](https://github.com/NakyeomLee)
