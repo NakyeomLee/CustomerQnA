@@ -104,6 +104,7 @@ public interface QNA_Mapper {
 	List<QNA> findBySecureIsFalse(int pageSize, int offset);
 	
 	// 게시글 조회(article_id(pk)로 검색, title, content, username)
+	// 해당 게시글 상세 보기에 활용
 	@Select("SELECT * FROM customerqna WHERE article_id = #{articleId}")
 	@Results(
 			id = "qnaMapping"
@@ -123,6 +124,38 @@ public interface QNA_Mapper {
 	)
 	QNA findById(Integer articleId);
 	
+	// 제목으로 게시글 조회(검색)
+	@Select({
+        "select article_id, title, content, username, views, comments, is_secure, created_at from customerqna",
+        "where is_deleted = false and lower(title) like lower(concat('%', #{title}, '%'))",
+        "order by article_id desc",
+        "limit #{pageSize} offset #{offset}"
+    })
+	@ResultMap("qnaList") // 위의 @Results를 그대로 사용할거니까 @ResultMap 이용해서 @Results의 id 작성
+	List<QNA> findByTitle(String title, int pageSize, int offset);
+	
+	// 제목으로 검색한 게시글 수
+	@Select({"SELECT COUNT(*) FROM customerqna WHERE is_deleted = false ",
+			 "and lower(title) like lower(concat('%', #{title}, '%'))"
+	})
+	int getCountByTitle(String title);
+	
+	// 작성자로 게시글 조회(검색)
+	@Select({
+        "select article_id, title, content, username, views, comments, is_secure, created_at from customerqna",
+        "where is_deleted = false and lower(username) like lower(concat('%', #{username}, '%'))",
+        "order by article_id desc",
+        "limit #{pageSize} offset #{offset}"
+    })
+	@ResultMap("qnaList") // 위의 @Results를 그대로 사용할거니까 @ResultMap 이용해서 @Results의 id 작성
+	List<QNA> findByUsername(String username, int pageSize, int offset);
+	
+	// 작성자로 검색한 게시글 수
+	@Select({"SELECT COUNT(*) FROM customerqna WHERE is_deleted = false ",
+			 "and lower(username) like lower(concat('%', #{username}, '%'))"
+	})
+	int getCountByUsername(String username);
+	
 	// views count 수정(article_id)(1 증가)
 	@Update("UPDATE customerqna SET views = views + 1 WHERE article_id = #{articleId}")
 	int updateCount(Integer articleId);
@@ -138,6 +171,7 @@ public interface QNA_Mapper {
 	
 	// SQLProvider : MyBatis를 통해 동적으로 SQL 쿼리를 생성
 	// 정렬과 페이징 처리가 필요한 상황에 유용하게 쓰임
+	// 수업 예제로 써놓은거니까 게시판 구현에 응용해보기
 	class SQLProvider {
 		public String selectOrderBy(MyOrder order) {
 			return new SQL()

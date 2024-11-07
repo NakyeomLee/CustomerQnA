@@ -31,8 +31,8 @@ public class QNA_Controller {
 	private QNA_Service service;
 
 	@GetMapping("/qna")
-	// @PageableDefault(size = 10) => pageable의 기본값을 10으로 설정
-	public String qna(@PageableDefault(size = 10) Pageable pageable, Model model) {
+	// @PageableDefault(size = 10) => pageable의 기본값을 15로 설정 => 한 페이지에 표시될 게시글의 수
+	public String qna(@PageableDefault(size = 15) Pageable pageable, Model model) {
 		int pageSize = pageable.getPageSize();
 		int pageNumber = pageable.getPageNumber();
 		int offset = (int) pageable.getOffset();
@@ -53,11 +53,62 @@ public class QNA_Controller {
 
 		return "qna"; // view
 	}
-
+	
+	@GetMapping(value="/qna/search", params = "searchField=title")
+	public String searchByTitle(
+			@RequestParam("searchField") String searchField,
+			@RequestParam("searchText") String searchText,
+			@PageableDefault(size = 15) Pageable pageable, Model model) {
+		
+		int pageSize = pageable.getPageSize();
+		int pageNumber = pageable.getPageNumber();
+		int offset = (int) pageable.getOffset();
+		
+		// 제목으로 검색한 게시글 가져오기
+		List<QNA> qnaList = service.findByTitle(searchText, pageSize, offset);
+		
+		// 모델에 데이터 추가
+	    model.addAttribute("qnaList", qnaList);
+        model.addAttribute("currentPage", pageNumber);
+        // 총 페이지 수 계산
+        model.addAttribute("totalPages", (service.getCountByTitle(searchText) + pageSize - 1) / pageSize);
+		// 검색 조건과 입력된 검색어 가져오기
+        model.addAttribute("searchField", searchField);
+        model.addAttribute("searchText", searchText);
+        
+		return "qna"; // view
+	}
+	
+	@GetMapping(value="/qna/search", params = "searchField=username")
+	public String searchByUsername(
+			@RequestParam("searchField") String searchField,
+			@RequestParam("searchText") String searchText,
+			@PageableDefault(size = 15) Pageable pageable, Model model) {
+		
+		int pageSize = pageable.getPageSize();
+		int pageNumber = pageable.getPageNumber();
+		int offset = (int) pageable.getOffset();
+		
+		// 작성자로 검색한 게시글 가져오기
+		List<QNA> qnaList = service.findByUsername(searchText, pageSize, offset);
+		
+		// 모델에 데이터 추가
+	    model.addAttribute("qnaList", qnaList);
+        model.addAttribute("currentPage", pageNumber);
+        // 총 페이지 수 계산
+        model.addAttribute("totalPages", (service.getCountByUsername(searchText) + pageSize - 1) / pageSize);
+        // 검색 조건과 입력된 검색어 가져오기
+        model.addAttribute("searchField", searchField);
+        model.addAttribute("searchText", searchText);
+		
+		return "qna"; // view
+	}
+	
 	@GetMapping("/qna/{id}")
 	public String readArticle(@PathVariable Integer id, Model model) {
 		QNA qna = service.findById(id);
 
+		// 모델에 데이터 추가
 		model.addAttribute("qna", qna);
 
 		return "article";

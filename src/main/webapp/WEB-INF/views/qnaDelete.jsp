@@ -77,9 +77,9 @@ input[type="submit"] {
 		<div class="writePassword">
 			<!-- 비밀번호 입력 폼 -->
 			<form action="/qnaDelete/${article_id}" method="POST">
-				<label for="password">비밀번호: </label> <input type="password"
-					id="password" name="password" required> <input
-					type="submit" value="삭제하기">
+				<label for="password">비밀번호: </label> 
+				<input type="password" id="password" name="password" required> 
+				<input type="submit" value="삭제하기">
 			</form>
 		</div>
 

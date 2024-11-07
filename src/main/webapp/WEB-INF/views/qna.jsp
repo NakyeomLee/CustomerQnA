@@ -19,7 +19,7 @@ body {
 }
 
 header {
-	margin: 30px;
+	margin: 10px;
 }
 
 main {
@@ -76,7 +76,7 @@ main {
 .write {
 	background-color: #f0f0f0;
 	color: #ffffff;
-	border: none;
+	border: 1px solid #ddd;
 	padding: 10px 15px;
 	border-radius: 5px;
 	cursor: pointer;
@@ -114,7 +114,7 @@ a {
 	</c:if>
 
 	<header>
-		<h1>게시글 목록</h1>
+		<h1><a href="/qna">게시글 목록</a></h1>
 	</header>
 	<main>
 		<div class="contentpanel">
@@ -125,14 +125,14 @@ a {
 				</div>
 				<div class="searchFormPanel">
 					<!-- 기준별 검색 폼 -->
-					<form id="searchForm" method="GET" action="/searchQna">
+					<form id="searchForm" method="GET" action="/qna/search">
 						<table>
 							<tr>
 								<td>
 									<!-- 드롭박스 이용해서 검색 기준 보여줌 --> <select id="searchField"
 									class="searchOption" name="searchField">
 										<option value="title">제목</option>
-										<option value="content">작성자</option>
+										<option value="username">작성자</option>
 								</select>
 								</td>
 								<td>
@@ -156,7 +156,7 @@ a {
 							<th>제목</th>
 							<th>작성자</th>
 							<th>조회수</th>
-							<th>등록일자</th>
+							<th>작성일자</th>
 						</tr>
 					</thead>
 					<!-- 표 바디 -->
@@ -181,16 +181,18 @@ a {
 				</table>
 			</div>
 			<!-- 페이징 컨트롤 -->
+			<!-- 페이지 수가 1보다 클 때만 표시 -->
 			<c:if test="${totalPages > 1}">
-				<!-- 페이지 수가 1보다 클 때만 표시 -->
 				<div class="pagination">
 					<c:if test="${currentPage > 0}">
-						<a href="/qna?page=${currentPage - 1}">이전</a>
+						<a href="/qna?page=${currentPage - 1}
+			                <c:if test="${not empty searchField}">&searchField=${searchField}</c:if>
+			                <c:if test="${not empty searchText}">&searchText=${searchText}</c:if>">이전
+			            </a>
 					</c:if>
 
-					<!-- 한 번에 표시할 페이지 수 -->
+					<!-- 한 번에 표시할 페이지 숫자 수 -->
 					<c:set var="pageBlockSize" value="10" />
-
 					<!-- 시작 페이지와 끝 페이지 계산 -->
 					<c:set var="startPage" value="${(currentPage / pageBlockSize) * pageBlockSize}" />
 					<c:set var="endPage" value="${startPage + pageBlockSize - 1}" />
@@ -203,18 +205,23 @@ a {
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
 						<c:choose>
 							<c:when test="${i == currentPage}">
-								<strong>${i + 1}</strong>
 								<!-- 현재 페이지 강조 -->
+								<strong>${i + 1}</strong>
 							</c:when>
 							<c:otherwise>
-								<a href="/qna?page=${i}">${i + 1}</a>
+								 <a href="/qna?page=${i}<c:if test="${not empty searchField}">&searchField=${searchField}</c:if>
+								 <c:if test="${not empty searchText}">&searchText=${searchText}</c:if>">${i + 1}
+			                     </a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 
 					<c:if test="${currentPage < totalPages - 1}">
-						<a href="/qna?page=${currentPage + 1}">다음</a>
-					</c:if>
+			            <a href="/qna?page=${currentPage + 1}
+			                <c:if test="${not empty searchField}">&searchField=${searchField}</c:if>
+			                <c:if test="${not empty searchText}">&searchText=${searchText}</c:if>">다음
+			            </a>
+			        </c:if>
 				</div>
 			</c:if>
 		</div>

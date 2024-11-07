@@ -14,7 +14,20 @@ public interface QNA_Service {
 	// 게시글 목록 조회
 	List<QNA> findAll(int pageSize, int offset);
 	
+	// 전체 게시글 수 조회
 	int getTotalCount();
+		
+	// 제목으로 게시글 검색
+	List<QNA> findByTitle(String title, int pageSize, int offset);
+	
+	// 작성자로 게시글 검색
+	List<QNA> findByUsername(String username, int pageSize, int offset);
+	
+	// 제목으로 검색한 게시글 수 조회
+	int getCountByTitle(String title);
+	
+	// 작성자로 검색한 게시글 수 조회
+	int getCountByUsername(String username);
 	
 	// 게시글 수정
 	int update(QNA qna);
@@ -32,7 +45,7 @@ public interface QNA_Service {
 모든 사용자가 게시글 열람 가능 (비밀글은 비밀번호 일치시)
 - [V] 조회수 자동 증가
 최신순/조회수순 정렬 가능
-- [V] 페이지당 20개 게시글 표시 (일단 5개로 해놓음)
+- [V] 페이지당 20개 게시글 표시 (일단 10개로 해놓음)
 페이지 표시하는 숫자가 10을 넘을 경우 다음을 눌러야 11부터 또 나오도록 하기
 
 3. 게시글 수정/삭제
