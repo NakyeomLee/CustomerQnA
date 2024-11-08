@@ -119,7 +119,7 @@
 
 - 테이블 논리 구성, 작업 프로젝트 생성, 공유 repository 생성
 - H2DB 라이브러리 추가 및 활용(pom.xml파일과 properties 파일 수정,sql 파일을 프로젝트에 추가)
- 1. 테이블 정의 : 기본키(Pk), 외래키(Fk), 널 허용 여부(Null/Not Null), 자동 증가(Auto Increment)설정을 포함한 테이블 정의
+ 1. 테이블 정의 : 기본키(Pk), Null 허용 여부(Null/Not Null), 자동 증가(Auto Increment)설정을 포함한 테이블 정의
  2. 테이블 생성 : customerqna 테이블 생성하고 테스트 용 데이터를 추가
  3. Test Mapper를 작성한 뒤 h2-console실시간 입출력 테스트
 
